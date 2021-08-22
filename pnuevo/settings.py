@@ -25,7 +25,8 @@ SECRET_KEY = '*2sh(wgpaz4)fy(if^*u%ac0!at&ne=o85#kjv0r1#n+&x_ro)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# Esto lo sacamos cuando hicimos el buildpack
+ALLOWED_HOSTS = ['proyectojuegote.herokuapp.com']
 
 
 # Application definition
