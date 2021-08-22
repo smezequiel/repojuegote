@@ -1,0 +1,33 @@
+{% extends "usuario\base.html"%}
+{% block titulO %}Login{% endblock %}
+{% block body %}
+
+    <div class="row justify-content-md-center m-3 p4">
+      <div class="mb-3 col-lg-6">
+        <form method="post">      <!--ES MUCHO MUY IMPORTANTE DEFINIR ESTO COMO POST!!! POR DEFECTO VA A SALIR GET SOLO CON LA INFO-->
+          {% csrf_token %}        <!--ESTO TAMBIEN MUCHO MUY IMPORTANTE!!! ES EL TOKEN PARA DAR SEGURIDAD A LA CONTRASENA-->
+          <div class="mb-3">
+            <label for="username" class="form-label">Nombre de Usuario</label>  <!-- reemplazamos en for por username y pusimos nombre de usuario en vez de email-->
+            <input type="text" class="form-control" name="username" aria-describedby="emailHelp"> <!--estaba type= email pero como no tiene arroba necesitamos tipo text nomas, y tambien cambiamos id por name y pusimos username-->
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" name="password" id="password">  <!--reemplazamos todo por password-->
+          </div>  
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+
+
+    {% if form.errors %}    <!--Esto esta afuera, indicando que en caso de que haya un error, aparezca el div, si estuviera dentro aparece el div vacio-->
+      <div class="alert alert-danger" role="alert">
+      Su nombre de usuario y contraseña no coinciden. Por favor revise los datos ingresados e intente nuevamente.
+      {% endif %}
+      </div>
+
+  <br>
+  <a href="/registro" class="btn btn-success">Registrar usuario</a>
+  
+{% endblock %} 

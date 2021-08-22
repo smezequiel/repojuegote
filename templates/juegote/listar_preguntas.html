@@ -1,0 +1,28 @@
+{% extends "usuario\base.html"%}
+{% block titulO %}Preguntas{% endblock %}
+{% block body %}
+
+        <div class="row justify-content-md-center m-4">
+            <div class="mb-3 row-cols-lg-6">
+                    <form action="" method="POST">
+                    {% csrf_token %}
+                    {% for item, value in data.items %}
+                        <div class="alert alert-warning" role="alert">
+                            {{ item }}
+                        </div>                
+                        {{value.categoria}} <br>
+                            <select name="{{ forloop.counter }}">
+                                <option value="">---------</option>
+                                {% for opcion in value.opciones %}
+                                    <option value="{{ opcion.id }}">{{ opcion.opcion }}</option>
+                                {% endfor %}
+                            </select>
+                        <br>
+                    {% endfor %}
+                    <br>
+                    <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+{% endblock %}
+

@@ -1,0 +1,32 @@
+{% extends "usuario\base.html"%}
+{% block titulO %}Home{% endblock %}
+{% block body %}
+
+  {% if request.user.username %}
+    <div class="card">
+      <div class="card-header">
+        JUEGOTE
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Bienvenidos a mi pagina de juegos</h5>
+        <p class="card-text">Para acceder a las preguntes haga click en jugar:</p>
+        <a href="/juegote" class="btn btn-primary">JUGAR</a>
+      </div>
+    </div>
+  {% else %}
+
+    <div class="card">
+      <div class="card-header">
+        JUEGOTE
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Bienvenidos a mi pagina de juegos</h5>
+        <p class="card-text">Para jugar debes iniciar sesion</p>
+        <a href="/" class="btn btn-primary">Iniciar sesion</a>
+      </div>
+    </div>
+
+  {% endif %}
+
+{% endblock %} 
+

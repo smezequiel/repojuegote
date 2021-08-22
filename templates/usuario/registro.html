@@ -1,0 +1,39 @@
+{% extends "usuario\base.html"%}
+{% block titulO %}Registro{% endblock %}
+{% block body %}
+
+    <div class="row justify-content-md-center m-3 p4">
+      <div class="mb-3 col-lg-6">
+        <form method="post">      <!--ES MUCHO MUY IMPORTANTE DEFINIR ESTO COMO POST!!! POR DEFECTO VA A SALIR GET SOLO CON LA INFO-->
+          {% csrf_token %}        <!--ESTO TAMBIEN MUCHO MUY IMPORTANTE!!! ES EL TOKEN PARA DAR SEGURIDAD A LA CONTRASENA-->
+          <div class="mb-3">
+
+            <label for="username" class="form-label">Nombre de Usuario</label>  
+            <input type="text" class="form-control" name="username" aria-describedby="emailHelp"> 
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password1" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" name="password1" id="password1">  <!--esto de password1 y 2 nos da el form que usamos. Tenemos que inspeccionar la pagina y ahi nos sale-->
+          </div>
+
+          <div class="mb-3">
+            <label for="password2" class="form-label">Confirmar contraseña</label>
+            <input type="password" class="form-control" name="password2" id="password2">  
+          </div>  
+          <button type="submit" class="btn btn-primary">Registrarme</button>
+        </form>
+      </div>
+    </div>
+
+    {% if form.errors %}    <!--Esto esta afuera, indicando que en caso de que haya un error, aparezca el div, si estuviera dentro aparece el div vacio-->
+    <div class="alert alert-danger" role="alert">
+    Las contraseñas no cumplen con los requisitos o no son iguales. Por favor revise los datos ingresados e intente nuevamente.
+    {% endif %}
+    </div>
+
+
+{% endblock %} 
+
+
