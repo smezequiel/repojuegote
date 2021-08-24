@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = '*2sh(wgpaz4)fy(if^*u%ac0!at&ne=o85#kjv0r1#n+&x_ro)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Esto lo sacamos cuando hicimos el buildpack
 ALLOWED_HOSTS = ['proyectojuegote.herokuapp.com', '127.0.0.1:8000']
