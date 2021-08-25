@@ -27,7 +27,7 @@ SECRET_KEY = '*2sh(wgpaz4)fy(if^*u%ac0!at&ne=o85#kjv0r1#n+&x_ro)'
 DEBUG = True
 
 # Esto lo sacamos cuando hicimos el buildpack
-ALLOWED_HOSTS = ['proyectojuegote.herokuapp.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['proyectojuegote.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
