@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block titulo %}Proyecto Info{% endblock %}
+{% block body %}
+    <div class="row justify-content-md-center m-5">
+        <div class="mb-3 col-lg-6">
+                {% for item in preguntas %}
+                 <div class="alert alert-primary" role="alert">{{item}}</div>
+                {% endfor %}
+        </div>
+     </div>
+{% endblock %}

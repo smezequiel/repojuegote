@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Info 2021</title>
+    </head>
+<body>
+    <h2>Detalle pregunta</h2>
+    {{pregunta.autor}}
+    <br>
+    {{pregunta.pregunta}}
+    <br>
+    {{pregunta.fecha_creacion}}
+<a class="btn btn-default" href="{% url 'juegote:editar_pregunta' pregunta.pk %}">Cancelar</a>
+<a class="btn btn-default" href="{% url 'juegote:confirmar_eliminacion' pregunta.pk %}">Confirmar</a>
+</body>
+</html>

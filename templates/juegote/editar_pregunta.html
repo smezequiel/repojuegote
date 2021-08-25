@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block titulo %}Proyecto Info{% endblock %}
+{% block body %}
+    <h2>Editar publicación</h2>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+{% endblock %}
+
+</html>
