@@ -9,7 +9,7 @@
     {{pregunta.pregunta}}
     <br>
     {{pregunta.fecha_creacion}}
-<a class="btn btn-default" href="{% url 'juegote:editar_pregunta' pregunta.pk %}">Cancelar</a>
+<a class="btn btn-default" href="{% url 'juegote:detalle_pregunta' pregunta.pk %}">Cancelar</a>
 <a class="btn btn-default" href="{% url 'juegote:confirmar_eliminacion' pregunta.pk %}">Confirmar</a>
 </body>
 </html>

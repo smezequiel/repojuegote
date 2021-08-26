@@ -40,23 +40,22 @@ def preguntas(request):
 
 def detalle_pregunta(request, identificador):
     pregunta = Pregunta.objects.get(pk=identificador)
-    return render(request, 'juegote/detalle_pregunta.html', {"preguntas": pregunta})
+    return render(request, 'juegote/detalle_pregunta.html', {"pregunta": pregunta})
 
 
 @login_required(login_url='/login')
 @permission_required('juegote.add_pregunta', login_url='/login')
 def crear_pregunta(request):
-    if request.user.has_perm('juegote.add_pregunta'):
-        if request.method == "POST":
-            form = PreguntaForm(request.POST)
-            if form.is_valid():
-                registro = form.save(commit=False)
-                registro.fecha_creacion = datetime.now()
-                registro.save()
-        form = PreguntaForm()
-        return render(request, 'juegote/crear_pregunta.html', {'form': form})
-    else:
-        return redirect("/")
+    form = PreguntaForm()
+    if request.method == "POST":
+        form = PreguntaForm(request.POST)
+        if form.is_valid():
+            registro = form.save(commit=False)
+            registro.autor = request.user
+            registro.fecha_creacion = datetime.now()
+            registro.save()
+            return redirect('juegote:preguntas')
+    return render(request, 'juegote/crear_pregunta.html', {'form': form})
 
 
 def editar_pregunta(request, identificador):
