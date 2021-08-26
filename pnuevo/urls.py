@@ -7,6 +7,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('juegote', include('juegote.urls')),
+    path('juegote/', include('juegote.urls')),
     path('', include('usuario.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

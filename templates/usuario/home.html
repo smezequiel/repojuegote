@@ -1,8 +1,11 @@
-{% extends "usuario\base.html"%}
+{% extends "base.html" %}
 {% block titulO %}Home{% endblock %}
 {% block body %}
+{% load static %}
 
   {% if request.user.username %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
     <div class="card">
       <div class="card-header">
         JUEGOTE
@@ -14,7 +17,6 @@
       </div>
     </div>
   {% else %}
-
     <div class="card">
       <div class="card-header">
         JUEGOTE
@@ -29,4 +31,5 @@
   {% endif %}
 
 {% endblock %} 
+
 
