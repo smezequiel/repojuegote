@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import permission_required
 def listar_preguntas(request):
     if request.method == "POST":
         resultado = 0
-        for i in range(1, 4):
+        for i in range(1, 8):
             opcion = Respuesta.objects.get(pk=request.POST[str(i)])
             resultado += opcion.puntaje
         Partida.objects.create(usuario=request.user,
@@ -22,7 +22,7 @@ def listar_preguntas(request):
     else:
         data = {}
         preguntas = Pregunta.objects.all().order_by(
-            '?')[:3]  # Cuantas preguntas se van a mostrar
+            '?')[:10]  # Cuantas preguntas se van a mostrar
         for item in preguntas:
             respuestas = Respuesta.objects.filter(id_pregunta=item.id)
             categoria = Categoria.objects.get(pk=item.id_categoria.id)
