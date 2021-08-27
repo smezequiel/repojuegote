@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Info 2021</title>
+    </head>
+<body>
+    <h2>Detalle pregunta</h2>
+    {{respuesta.opcionr}}
+    <br>
+    {{respuesta.id_pregunta}}
+    <br>
+    {{respuesta.puntaje}}
+<a class="btn btn-default" href="{% url 'juegote:detalle_respuesta' respuesta.pk %}">Cancelar</a>
+<a class="btn btn-default" href="{% url 'juegote:confirmar_resp_eliminacion' respuesta.pk %}">Confirmar</a>
+</body>
+</html>

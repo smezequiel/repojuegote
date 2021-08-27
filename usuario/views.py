@@ -40,4 +40,5 @@ def logout(request):
 
 
 def home(request):
-    return render(request, 'usuario/home.html')
+    permisos = request.user.get_all_permissions()
+    return render(request, 'usuario/home.html', {"permisos": "permisos"})
