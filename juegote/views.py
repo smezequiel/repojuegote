@@ -10,19 +10,47 @@ from django.contrib.auth.decorators import permission_required
 
 
 @login_required(login_url='/login')
-def listar_preguntas(request):
+# la expresion correcta de view y eso lo vemos en el admin de la app
+def elegir_categorias(request):
+    # Usa el modelo Categoria y se trae todos los modelos que tiene. Se trae todas las preguntas de la BD y las renderiza
+    # Tengo la opcion de id, categoria, descripcion, pregunta (supongo que sacadas de models)
+    categorias = Categoria.objects.all().order_by('categoria')
+    agrupados = {
+        'categorias': categorias
+    }
+    return render(request, 'juegote/categorias.html', {"categorias": categorias})
+
+
+def categoria_page(request, id):
+    return None
+
+
+@login_required(login_url='/login')
+# la expresion correcta de view y eso lo vemos en el admin de la app
+def preguntas_categorias(request,  identificador):
+    preguntitas = Categoria.objects.get(pk=identificador)
+    return render(request, 'juegote/preguntas_categorias.html', {"preguntitas": preguntitas})
+
+
+@login_required(login_url='/login')
+def listar_preguntas(request, identificador):
     if request.method == "POST":
         resultado = 0
-        for i in range(1, 8):
+        numero_preguntas = len(Pregunta.objects.filter(
+            id_categoria_id=identificador))
+        data = {}
+        for i in range(1, numero_preguntas+1):
             opcion = Respuesta.objects.get(pk=request.POST[str(i)])
             resultado += opcion.puntaje
+            pregunta = Pregunta.objects.get(pk=opcion.id_pregunta_id)
+            data[pregunta] = [opcion.opcion, opcion.puntaje]
         Partida.objects.create(usuario=request.user,
                                fecha=datetime.now, resultado=resultado)
-        return redirect("/")
+        return render(request, 'juegote/resultados.html', {"data": data, "resultado": resultado})
     else:
         data = {}
-        preguntas = Pregunta.objects.all().order_by(
-            '?')[:10]  # Cuantas preguntas se van a mostrar
+        preguntas = Pregunta.objects.filter(id_categoria_id=identificador).order_by(
+            '?')[:]  # Cuantas preguntas se van a mostrar
         for item in preguntas:
             respuestas = Respuesta.objects.filter(id_pregunta=item.id)
             categoria = Categoria.objects.get(pk=item.id_categoria.id)
@@ -98,30 +126,6 @@ def confirmar_eliminacion(request, identificador):
 
 
 @login_required(login_url='/login')
-def listar_preguntas(request):
-    if request.method == "POST":
-        resultado = 0
-        for i in range(1, 4):
-            opcion = Respuesta.objects.get(pk=request.POST[str(i)])
-            resultado += opcion.puntaje
-        Partida.objects.create(usuario=request.user,
-                               fecha=datetime.now, resultado=resultado)
-        return redirect("/")
-    else:
-        data = {}
-        preguntas = Pregunta.objects.all().order_by(
-            '?')[:3]  # Cuantas preguntas se van a mostrar
-        for item in preguntas:
-            respuestas = Respuesta.objects.filter(id_pregunta=item.id)
-            categoria = Categoria.objects.get(pk=item.id_categoria.id)
-            # {pregunta: {opciones: [opcion1, opcion2, opcion] categoria: categoria}
-            data[item.pregunta] = {
-                "opciones": respuestas, "categoria": categoria}
-
-        return render(request, 'juegote/listar_preguntas.html', {"preguntas": preguntas, "data": data})
-
-
-@login_required(login_url='/login')
 # la expresion correcta de view y eso lo vemos en el admin de la app
 @permission_required('juegote.view_respuesta', login_url='/login')
 def listar_respuestas(request):
@@ -148,7 +152,7 @@ def crear_respuesta(request):
         form = RespuestaForm(request.POST)
         if form.is_valid():
             form.save()  # A diferencia del anterior, el commit era False porque tambien le ibamos a agregar fecha de creacion y autor, en este caso no tenemos ninguno de los dos asi que podemos ponerle que guarde en la BD
-            return redirect('juegote:listar_respuestas')
+            return redirect('juegote:respuestas')
     return render(request, 'juegote/crear_respuesta.html', {'form': form})
 
 

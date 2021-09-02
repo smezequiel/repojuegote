@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block titulo %}Categorias{% endblock %}
+{% block body %}
+
+
+    <div class="row justify-content-md-center m-5">
+        <h4>
+            <center><div class="mb-3 col-lg-4">
+                <div class="m-3 p-3 rounded border border-4">SELECCIONE LA CATEGORIA CON LA QUE DESEA JUGAR</div>
+            </div></center>
+        </h4>
+        <div class="mb-3 col-lg-2">
+                {% for categoria in categorias %} 
+            <div class="alert alert-primary" role="alert">
+                <a class="btn btn-primary" href="{% url 'juegote:listar_preguntas' categoria.pk %}">{{categoria.categoria}}</a>
+            </div>
+                {% endfor %}
+        </div> 
+    </div>
+{% endblock %}
