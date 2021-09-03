@@ -1,4 +1,4 @@
-{% extends "base2.html" %}
+{% extends "base.html" %}
 {% block titulo %}Categorias{% endblock %}
 {% block body %}
 
@@ -12,7 +12,7 @@
         <div class="mb-3 col-lg-2">
                 {% for categoria in categorias %} 
             <div class="alert alert-primary" role="alert">
-                <a class="btn btn-primary" href="{% url 'juegote:listar_preguntas' categoria.pk %}">{{categoria.categoria}}</a>
+                <a class="btn btn-primary" href=""{% url 'juegote:editar_pregunta' pregunta.pk %}">{{categoria.categoria}}</a>
             </div>
                 {% endfor %}
         </div> 

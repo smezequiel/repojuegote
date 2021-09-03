@@ -1,0 +1,11 @@
+html,
+body {
+  font-family: Segoe UI;
+  background-color: #7ef29d;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
